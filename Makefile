@@ -48,3 +48,11 @@ clean:
 	- @find . -name "__pycache__" -delete
 	- @find . -name "*.pytest_cache" -exec rm -rf {} \;
 	- @find . -name "*.mypy_cache" -exec rm -rf {} \;
+
+.PHONY: db_upgrade
+db_upgrade:
+	alembic upgrade head
+
+.PHONY: db_generate_revision
+db_generate_revision:
+	alembic revision --autogenerate

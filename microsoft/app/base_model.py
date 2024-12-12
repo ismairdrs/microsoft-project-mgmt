@@ -5,8 +5,8 @@ from sqlalchemy import DateTime
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import Mapped, mapped_column
 
-from gringotts.db import Base
-from gringotts.db.functions import utcnow
+from microsoft.db import Base
+from microsoft.db.functions import utcnow
 
 
 class BaseModel(Base):
