@@ -56,3 +56,7 @@ db_upgrade:
 .PHONY: db_generate_revision
 db_generate_revision:
 	alembic revision --autogenerate
+
+.PHONY: run
+run:
+	uvicorn $(APPLICATION) --reload
