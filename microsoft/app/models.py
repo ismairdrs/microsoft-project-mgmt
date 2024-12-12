@@ -14,19 +14,21 @@ from microsoft.app.base_model import Base
 
 class DBClient(Base):
     __tablename__ = "clients"
-    
+
     id: Mapped[uuid.UUID] = mapped_column(
         postgresql.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     name: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     phone: Mapped[str] = mapped_column(String, nullable=False, unique=True)
-    projects = relationship("DBProject", back_populates="client")  # Correct relationship
+    projects = relationship(
+        "DBProject", back_populates="client"
+    )  # Correct relationship
 
 
 class DBProject(Base):
     __tablename__ = "projects"
-    
+
     id: Mapped[uuid.UUID] = mapped_column(
         postgresql.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
@@ -44,7 +46,7 @@ class DBProject(Base):
 
 class DBActivity(Base):
     __tablename__ = "activities"
-    
+
     id: Mapped[uuid.UUID] = mapped_column(
         postgresql.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )

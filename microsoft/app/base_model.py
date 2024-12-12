@@ -11,7 +11,7 @@ from gringotts.db.functions import utcnow
 
 class BaseModel(Base):
     __abstract__ = True
-    
+
     id: Mapped[uuid.UUID] = mapped_column(
         postgresql.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
