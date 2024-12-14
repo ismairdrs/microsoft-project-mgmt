@@ -33,9 +33,7 @@ def _get_error_code(err_type: Enum) -> HTTPStatus:
     }.get(err_type, HTTPStatus.INTERNAL_SERVER_ERROR)
 
 
-def error_to_response(
-    exc: Union[MicrosoftException]
-) -> ResponseBody:
+def error_to_response(exc: Union[MicrosoftException]) -> ResponseBody:
     exception_data = exc.data
     return ResponseBody(
         message=exception_data["message"],
