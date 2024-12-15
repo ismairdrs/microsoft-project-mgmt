@@ -12,9 +12,9 @@ ENVIRONMENT = config("ENVIRONMENT", "")
 COMMIT_SHA = config("COMMIT_SHA", "")
 
 # Database specifications
-DB_USER = config("DB_USER", "")
-DB_PASS = config("DB_PASS", "")
-DB_HOST = config("DB_HOST", "")
+DB_USER = config("DB_USER", "postgres")
+DB_PASS = config("DB_PASS", "postgres")
+DB_HOST = config("DB_HOST", "localhost")
 DB_PORT = config("DB_PORT", default="5432")
 DB_NAME = config("DB_NAME", "")
 DB_POOL_SIZE = config(
@@ -70,3 +70,7 @@ def build_session_config() -> Dict[str, bool]:
 
 def is_development() -> bool:
     return ENVIRONMENT == "development"
+
+
+def retrieve_engine_config() -> Dict[str, Any]:
+    return default_engine_config() | reusable_pool_engine_config()

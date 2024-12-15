@@ -9,10 +9,10 @@ from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from microsoft.enums import ProjectStatus
-from microsoft.app.base_model import Base
+from microsoft.app.base_model import BaseModel
 
 
-class DBClient(Base):
+class DBClient(BaseModel):
     __tablename__ = "clients"
 
     id: Mapped[uuid.UUID] = mapped_column(
@@ -26,7 +26,7 @@ class DBClient(Base):
     )  # Correct relationship
 
 
-class DBProject(Base):
+class DBProject(BaseModel):
     __tablename__ = "projects"
 
     id: Mapped[uuid.UUID] = mapped_column(
@@ -44,7 +44,7 @@ class DBProject(Base):
     activities = relationship("DBActivity", back_populates="project")
 
 
-class DBActivity(Base):
+class DBActivity(BaseModel):
     __tablename__ = "activities"
 
     id: Mapped[uuid.UUID] = mapped_column(

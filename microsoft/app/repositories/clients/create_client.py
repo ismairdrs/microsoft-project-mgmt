@@ -23,7 +23,7 @@ class Client(BaseModel):
     phone: str | None = None
 
 
-async def create_db_client(client: CreateClientDataIn):
+def create_db_client(client: CreateClientDataIn) -> DBClient:
     return DBClient(name=client.name, email=client.email, phone=client.phone)
 
 
@@ -40,12 +40,15 @@ async def to_client(db_client: DBClient) -> Client:
 class PersistClientRepository(BaseRepository):
     async def run(self, client: CreateClientDataIn) -> Client:
         try:
-            db_client = create_db_client(client)
+            db_client = create_db_client(
+                client
+            )  # Sem await aqui, pois é uma função síncrona
             self.db_session.add(db_client)
             await self.db_session.commit()
+            await self.db_session.refresh(db_client)
         except Exception as e:
             raise NotImplemented("lançar exception especifica")
-        return to_client(db_client)
+        return await to_client(db_client)
 
 
 async def factory() -> AsyncGenerator[PersistClientRepository, None]:

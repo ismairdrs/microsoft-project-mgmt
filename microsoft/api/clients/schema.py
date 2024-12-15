@@ -47,8 +47,3 @@ class ClientOut(BaseModel):
         title="Created at",
         examples=["2020-01-01 00:00:00"],
     )
-    updated_at: datetime = Field(
-        ...,
-        title="Updated at",
-        examples=["2020-01-01 00:00:00"],
-    )

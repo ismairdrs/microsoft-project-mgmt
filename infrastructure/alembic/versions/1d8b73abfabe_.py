@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 96d7b36afccf
+Revision ID: 1d8b73abfabe
 Revises: 
-Create Date: 2024-12-12 18:14:05.949500
+Create Date: 2024-12-15 18:47:01.541742
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '96d7b36afccf'
+revision = '1d8b73abfabe'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,8 @@ def upgrade() -> None:
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('phone', sa.String(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('phone'),
@@ -34,6 +36,8 @@ def upgrade() -> None:
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('status', sa.Enum('OPEN', 'CLOSED', 'IN_PROGRESS', name='projectstatus'), nullable=False),
     sa.Column('client_id', sa.UUID(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
     sa.ForeignKeyConstraint(['client_id'], ['public.clients.id'], ),
     sa.PrimaryKeyConstraint('id'),
     schema='public'
@@ -43,6 +47,8 @@ def upgrade() -> None:
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('project_id', sa.UUID(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text("TIMEZONE('utc', CURRENT_TIMESTAMP)"), nullable=False),
     sa.ForeignKeyConstraint(['project_id'], ['public.projects.id'], ),
     sa.PrimaryKeyConstraint('id'),
     schema='public'

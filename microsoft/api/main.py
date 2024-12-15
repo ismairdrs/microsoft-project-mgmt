@@ -6,6 +6,10 @@ from fastapi.exceptions import HTTPException
 
 from microsoft.app.exceptions import MicrosoftException
 from microsoft.api.clients.resources import router as clients_router
+from microsoft.db.connection import (
+    create_thread_safe_context,
+    teardown_thread_safe_context,
+)
 import settings
 
 from .exception_handlers import (
@@ -18,6 +22,8 @@ from .exception_handlers import (
 
 def create_application() -> FastAPI:
     application = FastAPI()
+
+    create_thread_safe_context(is_single_threaded=True)
 
     configure_healthcheck(application)
     configure_routes(application)
@@ -49,3 +55,8 @@ def configure_healthcheck(app: FastAPI) -> None:
 
 
 app = create_application()
+
+
+@app.on_event("shutdown")
+async def shutdown_event() -> None:
+    await teardown_thread_safe_context()
