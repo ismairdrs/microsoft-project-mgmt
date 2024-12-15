@@ -1,8 +1,9 @@
+from microsoft.app.client.entities import ClientIn
+from microsoft.app.exceptions import MicrosoftException, MicrosoftExceptionType
 from microsoft.app.repositories.clients.create_client import (
     Client,
     PersistClientRepository,
 )
-from microsoft.app.client.entities import ClientIn
 
 
 async def create_client_service(
@@ -11,5 +12,7 @@ async def create_client_service(
     try:
         return await repository.run(client=payload)
     except Exception as e:
-        print(f'Expcetion: {e}')
-        # raise NotImplemented("Gravar logs e lanaçar exception correta")
+        raise MicrosoftException(
+            type=MicrosoftExceptionType.CREATE_CLIENT_ERROR,
+            message="Error to create client",
+        )

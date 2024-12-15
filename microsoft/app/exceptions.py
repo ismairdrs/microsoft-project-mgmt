@@ -8,6 +8,7 @@ class MicrosoftExceptionType(Enum):
     ACTIVITY_NOT_FOUND = "ACTIVITY_NOT_FOUND"
     GENERAL_ERROR = "GENERAL_ERROR"
     NOT_FOUND = "NOT_FOUND"
+    CREATE_CLIENT_ERROR = "CREATE_CLIENT_ERROR"
 
 
 class MicrosoftException(Exception):
