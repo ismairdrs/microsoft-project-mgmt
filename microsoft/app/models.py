@@ -21,9 +21,7 @@ class DBClient(BaseModel):
     name: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     phone: Mapped[str] = mapped_column(String, nullable=False, unique=True)
-    projects = relationship(
-        "DBProject", back_populates="client"
-    )  # Correct relationship
+    projects = relationship("DBProject", back_populates="client")
 
 
 class DBProject(BaseModel):
