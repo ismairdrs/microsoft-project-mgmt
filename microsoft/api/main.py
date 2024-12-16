@@ -6,6 +6,8 @@ from fastapi.exceptions import HTTPException
 
 from microsoft.app.exceptions import MicrosoftException
 from microsoft.api.clients.resources import router as clients_router
+from microsoft.api.projects.resources import router as projects_router
+from microsoft.api.activity.resources import router as activities_router
 from microsoft.db.connection import (
     create_thread_safe_context,
     teardown_thread_safe_context,
@@ -34,6 +36,8 @@ def create_application() -> FastAPI:
 
 def configure_routes(application: FastAPI) -> None:
     application.include_router(clients_router)
+    application.include_router(projects_router)
+    application.include_router(activities_router)
 
 
 def configure_exception_handlers(application: FastAPI) -> None:
