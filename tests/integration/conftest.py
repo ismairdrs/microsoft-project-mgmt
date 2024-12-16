@@ -5,7 +5,7 @@ from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 import settings
-from microsoft.app.models import DBClient
+from microsoft.app.models import DBActivity, DBClient, DBProject
 from microsoft.db.connection import (
     _engines,
     _session_factories,
@@ -30,6 +30,8 @@ async def db(override_async_session):
 
 @pytest_asyncio.fixture(scope="function", autouse=True)
 async def clean_db(db):
+    await db.execute(delete(DBActivity))
+    await db.execute(delete(DBProject))
     await db.execute(delete(DBClient))
 
     await db.commit()
