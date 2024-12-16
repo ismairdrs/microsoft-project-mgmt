@@ -46,12 +46,12 @@ class PersistClientRepository(BaseRepository):
             self.db_session.add(db_client)
             await self.db_session.commit()
             await self.db_session.refresh(db_client)
-        except IntegrityError as e:
+        except IntegrityError:
             raise MicrosoftException(
                 type=MicrosoftExceptionType.CLIENT_ALREADY_EXISTS,
                 message="Client already exists in the database",
             )
-        except Exception as e:
+        except Exception:
             raise MicrosoftException(
                 type=MicrosoftExceptionType.CREATE_CLIENT_ERROR,
                 message="Error to create client",

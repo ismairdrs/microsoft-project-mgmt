@@ -7,7 +7,6 @@ from fastapi.responses import JSONResponse
 
 from microsoft.app.exceptions import MicrosoftException
 
-
 from .response_handlers import (
     error_to_response,
     http_exception_to_response,

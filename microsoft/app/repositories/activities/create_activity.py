@@ -50,12 +50,12 @@ class PersistActivityRepository(BaseRepository):
             self.db_session.add(db_activity)
             await self.db_session.commit()
             await self.db_session.refresh(db_activity)
-        except IntegrityError as e:
+        except IntegrityError:
             raise MicrosoftException(
                 type=MicrosoftExceptionType.ACTIVITY_ALREADY_EXISTS,
                 message="Activity already exists in the database",
             )
-        except Exception as e:
+        except Exception:
             raise MicrosoftException(
                 type=MicrosoftExceptionType.CREATE_ACTIVITY_ERROR,
                 message="Error to create activity",

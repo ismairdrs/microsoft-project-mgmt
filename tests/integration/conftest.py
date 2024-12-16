@@ -1,12 +1,11 @@
 import threading
 
 import pytest_asyncio
-from sqlalchemy import delete, update
+from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from microsoft.app.models import DBClient
 import settings
-
+from microsoft.app.models import DBClient
 from microsoft.db.connection import (
     _engines,
     _session_factories,

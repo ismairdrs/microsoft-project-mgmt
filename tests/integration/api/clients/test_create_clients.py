@@ -37,10 +37,10 @@ async def test_create_client_email_duplicate(async_client):
     response2 = await async_client.post("/clients", json=payload)
     assert response2.status_code == HTTPStatus.BAD_REQUEST
     assert response2.json() == {
-        'code': 400,
-        'errors': [],
-        'message': 'Client already exists in the database',
-        'type': 'CLIENT_ALREADY_EXISTS',
+        "code": 400,
+        "errors": [],
+        "message": "Client already exists in the database",
+        "type": "CLIENT_ALREADY_EXISTS",
     }
 
 
@@ -53,18 +53,18 @@ async def test_create_client_missing_fields(async_client):
     response = await async_client.post("/clients", json=payload)
     assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
     assert response.json() == {
-        'detail': [
+        "detail": [
             {
-                'input': {'name': 'Ismair Junior'},
-                'loc': ['body', 'email'],
-                'msg': 'Field required',
-                'type': 'missing',
+                "input": {"name": "Ismair Junior"},
+                "loc": ["body", "email"],
+                "msg": "Field required",
+                "type": "missing",
             },
             {
-                'input': {'name': 'Ismair Junior'},
-                'loc': ['body', 'phone'],
-                'msg': 'Field required',
-                'type': 'missing',
+                "input": {"name": "Ismair Junior"},
+                "loc": ["body", "phone"],
+                "msg": "Field required",
+                "type": "missing",
             },
         ]
     }

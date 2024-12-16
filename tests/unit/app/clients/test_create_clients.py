@@ -5,10 +5,7 @@ import pytest
 from microsoft.app.client.entities import ClientIn
 from microsoft.app.client.service import create_client_service
 from microsoft.app.exceptions import MicrosoftException
-from microsoft.app.repositories.clients.create_client import (
-    PersistClientRepository,
-    Client,
-)
+from microsoft.app.repositories.clients.create_client import Client
 
 
 @pytest.mark.asyncio

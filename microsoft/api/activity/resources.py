@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 
-from microsoft.api.activity.schema import ActivityOut, ActivityIn
+from microsoft.api.activity.schema import ActivityIn, ActivityOut
 from microsoft.app.activity.service import create_activity_service
 from microsoft.app.repositories.activities.create_activity import (
     PersistActivityRepository,

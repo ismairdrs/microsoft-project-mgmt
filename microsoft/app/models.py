@@ -1,15 +1,11 @@
 import uuid
 
-from sqlalchemy import (
-    Enum,
-    ForeignKey,
-    String,
-)
+from sqlalchemy import Enum, ForeignKey, String
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from microsoft.enums import ProjectStatus
 from microsoft.app.base_model import BaseModel
+from microsoft.enums import ProjectStatus
 
 
 class DBClient(BaseModel):

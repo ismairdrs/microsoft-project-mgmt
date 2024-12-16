@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends
 
 from microsoft.api.projects.schema import ProjectIn, ProjectOut
 from microsoft.app.projects.service import create_project_service
+from microsoft.app.repositories.projects.create_project import PersistProjectRepository
 from microsoft.app.repositories.projects.create_project import (
-    PersistProjectRepository,
     factory as project_repository_factory,
 )
 

@@ -4,15 +4,15 @@ from typing import Any, Dict
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
 
-from microsoft.app.exceptions import MicrosoftException
+import settings
+from microsoft.api.activity.resources import router as activities_router
 from microsoft.api.clients.resources import router as clients_router
 from microsoft.api.projects.resources import router as projects_router
-from microsoft.api.activity.resources import router as activities_router
+from microsoft.app.exceptions import MicrosoftException
 from microsoft.db.connection import (
     create_thread_safe_context,
     teardown_thread_safe_context,
 )
-import settings
 
 from .exception_handlers import (
     bad_request_handler,
@@ -41,10 +41,18 @@ def configure_routes(application: FastAPI) -> None:
 
 
 def configure_exception_handlers(application: FastAPI) -> None:
-    application.add_exception_handler(NotImplementedError, not_implemented_handler)
-    application.add_exception_handler(HTTPException, http_exception_handler)
-    application.add_exception_handler(JSONDecodeError, bad_request_handler)
-    application.add_exception_handler(MicrosoftException, validation_exception_handler)
+    application.add_exception_handler(
+        NotImplementedError, not_implemented_handler  # type: ignore
+    )
+    application.add_exception_handler(
+        HTTPException, http_exception_handler  # type: ignore
+    )
+    application.add_exception_handler(
+        JSONDecodeError, bad_request_handler  # type: ignore
+    )
+    application.add_exception_handler(
+        MicrosoftException, validation_exception_handler  # type: ignore
+    )
 
 
 def configure_healthcheck(app: FastAPI) -> None:

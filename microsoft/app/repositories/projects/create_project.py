@@ -1,18 +1,20 @@
 from datetime import datetime
+from typing import AsyncGenerator
 from uuid import UUID
+
 from pydantic import BaseModel
 from sqlalchemy.exc import IntegrityError
-from typing import AsyncGenerator
-from microsoft.db.repository import BaseRepository
-from microsoft.db.dependency_factory import create_repository
-from microsoft.app.models import DBProject
+
 from microsoft.app.exceptions import MicrosoftException, MicrosoftExceptionType
+from microsoft.app.models import DBProject
+from microsoft.db.dependency_factory import create_repository
+from microsoft.db.repository import BaseRepository
 from microsoft.enums import ProjectStatus
 
 
 class CreateProjectDataIn(BaseModel):
     name: str
-    status: str
+    status: ProjectStatus = ProjectStatus.OPEN
     client_id: UUID
     description: str | None = None
 
@@ -21,7 +23,7 @@ class Project(BaseModel):
     id: UUID
     name: str
     description: str | None
-    status: str
+    status: ProjectStatus
     client_id: UUID
     created_at: datetime
 
@@ -53,12 +55,12 @@ class PersistProjectRepository(BaseRepository):
             self.db_session.add(db_project)
             await self.db_session.commit()
             await self.db_session.refresh(db_project)
-        except IntegrityError as e:
+        except IntegrityError:
             raise MicrosoftException(
                 type=MicrosoftExceptionType.PROJECT_ALREADY_EXISTS,
                 message="Project already exists in the database",
             )
-        except Exception as e:
+        except Exception:
             raise MicrosoftException(
                 type=MicrosoftExceptionType.CREATE_PROJECT_ERROR,
                 message="Error to create project",

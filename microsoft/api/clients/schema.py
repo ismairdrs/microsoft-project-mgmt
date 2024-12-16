@@ -1,5 +1,6 @@
 from datetime import datetime
 from uuid import UUID
+
 from pydantic import BaseModel, Field
 
 
@@ -37,7 +38,7 @@ class ClientOut(BaseModel):
         description="E-mail contact",
         examples=["test@gmail.com"],
     )
-    phone: str = Field(
+    phone: str | None = Field(
         title="Phone",
         description="Phone Number",
         examples=["62981888888"],

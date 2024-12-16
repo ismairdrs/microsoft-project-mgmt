@@ -3,6 +3,11 @@ TEST_FOLDER = tests
 APPLICATION = microsoft.api.main:app
 
 
+.PHONY: typecheck
+typecheck:
+	mypy --python-version 3.11 --ignore-missing-imports --disallow-untyped-defs --disallow-untyped-calls $(PROJECT_NAME)/
+
+
 .PHONY: format
 format:
 	@echo ""

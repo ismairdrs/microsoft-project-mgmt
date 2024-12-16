@@ -1,4 +1,5 @@
 from http import HTTPStatus
+
 from fastapi import APIRouter, Depends
 
 from microsoft.api.clients.schema import ClientIn, ClientOut

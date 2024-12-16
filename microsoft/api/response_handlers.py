@@ -4,7 +4,6 @@ from json import JSONDecodeError
 from typing import Dict, List, Optional, Union
 
 from fastapi.exceptions import HTTPException
-
 from pydantic import BaseModel
 
 from microsoft.app.exceptions import MicrosoftException, MicrosoftExceptionType

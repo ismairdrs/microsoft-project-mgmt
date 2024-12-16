@@ -2,9 +2,9 @@ from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
-from microsoft.db import Base
-import settings
 
+import settings
+from microsoft.db import Base
 
 # NOTE: This line can't be removed as alembic use it for migration control
 from microsoft.app.models import *  # isort:skip
