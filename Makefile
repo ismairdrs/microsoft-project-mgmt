@@ -60,3 +60,30 @@ db_generate_revision:
 .PHONY: run
 run:
 	uvicorn $(APPLICATION) --reload
+
+
+.PHONY: db_upgrade_test
+db_upgrade_test:
+	DB_PORT=5435 DB_USER=postgres DB_PASS=microsoft_test DB_HOST=127.0.0.1 DB_PORT=5435 DB_NAME=microsoft_test DB_POOL_SIZE=5 DB_MAX_OVERFLOW=0 alembic upgrade head
+
+
+.PHONY: unit-test
+unit-test:
+	pytest tests/unit/ -vv
+
+.PHONY: integration-test
+integration-test:
+	-	docker container stop microsoft_test_db
+	-	docker container rm microsoft_test_db
+	docker run -d --name microsoft_test_db -e "POSTGRES_DB=microsoft_test" -e "POSTGRES_PASSWORD=microsoft_test" -P -p 127.0.0.1:5435:5432 postgres:14-alpine
+	sleep 3
+	-  @make db_upgrade_test
+	pytest tests/integration/ -vv
+	docker container stop microsoft_test_db
+	docker container rm microsoft_test_db
+
+
+.PHONY: coverage
+coverage:
+	coverage run -m pytest tests/unit/ -vv
+	coverage report -m

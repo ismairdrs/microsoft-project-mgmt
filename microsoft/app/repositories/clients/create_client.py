@@ -3,7 +3,9 @@ from typing import AsyncGenerator
 from uuid import UUID
 
 from pydantic import BaseModel
+from sqlalchemy.exc import IntegrityError
 
+from microsoft.app.exceptions import MicrosoftException, MicrosoftExceptionType
 from microsoft.app.models import DBClient
 from microsoft.db.dependency_factory import create_repository
 from microsoft.db.repository import BaseRepository
@@ -40,14 +42,20 @@ async def to_client(db_client: DBClient) -> Client:
 class PersistClientRepository(BaseRepository):
     async def run(self, client: CreateClientDataIn) -> Client:
         try:
-            db_client = create_db_client(
-                client
-            )  # Sem await aqui, pois é uma função síncrona
+            db_client = create_db_client(client)
             self.db_session.add(db_client)
             await self.db_session.commit()
             await self.db_session.refresh(db_client)
+        except IntegrityError as e:
+            raise MicrosoftException(
+                type=MicrosoftExceptionType.CLIENT_ALREADY_EXISTS,
+                message="Client already exists in the database",
+            )
         except Exception as e:
-            raise NotImplemented("lançar exception especifica")
+            raise MicrosoftException(
+                type=MicrosoftExceptionType.CREATE_CLIENT_ERROR,
+                message="Error to create client",
+            )
         return await to_client(db_client)
 
 

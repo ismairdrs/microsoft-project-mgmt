@@ -28,6 +28,7 @@ def _get_error_code(err_type: Enum) -> HTTPStatus:
         MicrosoftExceptionType.CLIENT_NOT_FOUND: HTTPStatus.BAD_REQUEST,
         MicrosoftExceptionType.PROJECT_NOT_FOUND: HTTPStatus.BAD_REQUEST,
         MicrosoftExceptionType.ACTIVITY_NOT_FOUND: HTTPStatus.BAD_REQUEST,
+        MicrosoftExceptionType.CLIENT_ALREADY_EXISTS: HTTPStatus.BAD_REQUEST,
         MicrosoftExceptionType.GENERAL_ERROR: HTTPStatus.INTERNAL_SERVER_ERROR,
         MicrosoftExceptionType.NOT_FOUND: HTTPStatus.BAD_REQUEST,
     }.get(err_type, HTTPStatus.INTERNAL_SERVER_ERROR)

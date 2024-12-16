@@ -11,6 +11,8 @@ async def create_client_service(
 ) -> Client:
     try:
         return await repository.run(client=payload)
+    except MicrosoftException as e:
+        raise e
     except Exception as e:
         raise MicrosoftException(
             type=MicrosoftExceptionType.CREATE_CLIENT_ERROR,
