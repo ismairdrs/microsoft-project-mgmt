@@ -34,8 +34,6 @@ async def update_db_activity(
         db_activity.name = updates.name
     if updates.description is not None:
         db_activity.description = updates.description
-    if updates.completed is not None:
-        db_activity.completed = updates.completed
     db_activity.updated_at = datetime.utcnow()
     return db_activity
 
@@ -61,7 +59,7 @@ class UpdateActivityRepository(BaseRepository):
                 message=f"Activity with ID {activity_id} not found",
             )
         try:
-            updated_activity = await update_db_activity(db_activity, updates)  # type: ignore
+            updated_activity = await update_db_activity(db_activity, updates)
             await self.db_session.commit()
             await self.db_session.refresh(updated_activity)
         except IntegrityError:
