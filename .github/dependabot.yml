@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Restrict only security updates
+    open-pull-requests-limit: 0
+    # Specify labels for pull requests
+  - package-ecosystem: "docker"
+    directory: "/infrastructure/docker"
+    schedule:
+      interval: "weekly"
+    # Restrict only security updates
+    open-pull-requests-limit: 0
+    # Specify labels for pull requests
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Restrict only security updates
+    open-pull-requests-limit: 0
+    # Specify labels for pull requests
