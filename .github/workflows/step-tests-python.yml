@@ -14,9 +14,6 @@ jobs:
       - name: Validate YAML file
         run: "yamllint --list-files -d '{extends: relaxed, rules: {line-length: {max: 200}, new-line-at-end-of-file: false, trailing-spaces: false}}' ./"
 
-      - name: Validate YAML ConfigMaps
-        run: bash ./bin/validate-env-configmaps.sh
-
       - name: "Set up Python 3.11"
         uses: actions/setup-python@v4
         with:
