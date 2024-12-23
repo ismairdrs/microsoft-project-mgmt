@@ -48,3 +48,21 @@ class ActivityOut(BaseModel):
         title="Created at",
         examples=["2020-01-01 00:00:00"],
     )
+
+
+class ActivityUpdateIn(BaseModel):
+    name: str | None = Field(
+        title="Activity Name",
+        description="Name of the activity",
+        examples=["Design Homepage"],
+    )
+    description: str | None = Field(
+        title="Description",
+        description="Detailed description of the activity",
+        examples=["Create the homepage layout with Figma"],
+    )
+    project_id: UUID | None = Field(
+        title="Project ID",
+        description="ID of the project associated with the activity",
+        examples=["5b2c6d4e-aef0-11ec-b909-0242ac120002"],
+    )
