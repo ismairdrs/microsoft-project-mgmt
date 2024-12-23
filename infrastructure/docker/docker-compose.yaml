@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
   microsoft_db:
@@ -8,11 +8,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5437:5432"
     volumes:
       - ./volumes/postgresql:/var/lib/postgresql/data
     networks:
-      - lend
+      - microsoft
 
   microsoft_pgadmin:
     image: dcagatay/pwless-pgadmin4:6.19
@@ -29,6 +29,24 @@ services:
     networks:
       - microsoft
 
+  microsoft_app:
+      build:
+        context: ../../
+        dockerfile: infrastructure/docker/Dockerfile
+      command: >
+        sh -c "alembic upgrade head && uvicorn microsoft.api.main:app --host 0.0.0.0 --port 8000 --reload"
+      ports:
+        - "8000:8000"
+      depends_on:
+        - microsoft_db
+      networks:
+        - microsoft
+      environment:
+        DB_USER: "postgres"
+        DB_PASS: "postgres"
+        DB_HOST: "microsoft_db"
+        DB_NAME: "postgres"
+        DB_PORT: "5432"
 networks:
   microsoft:
     driver: bridge

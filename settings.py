@@ -14,7 +14,7 @@ COMMIT_SHA = config("COMMIT_SHA", "")
 # Database specifications
 DB_USER = config("DB_USER", "postgres")
 DB_PASS = config("DB_PASS", "postgres")
-DB_HOST = config("DB_HOST", "localhost")
+DB_HOST = config("DB_HOST", "microsoft_db")
 DB_PORT = config("DB_PORT", default="5432")
 DB_NAME = config("DB_NAME", "")
 DB_POOL_SIZE = config(

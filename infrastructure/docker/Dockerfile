@@ -24,14 +24,14 @@ RUN apt update -y && \
     gcc \
     libc-dev && \
     apt clean && rm -rf /var/lib/apt/lists/*
+RUN ls /app
 
-# Create and activate virtualenv
-RUN python3 -m venv /app/venv
-ENV PATH="/app/venv/bin:$PATH"
 
 # Upgrade pip and install dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+
+RUN ls /app
+RUN pip install -r /app/requirements.txt
 
 # configurate system group
 RUN addgroup --gid 999 microsoftgroup && \

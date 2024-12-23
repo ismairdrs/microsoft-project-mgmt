@@ -64,7 +64,7 @@ db_generate_revision:
 
 .PHONY: run
 run:
-	uvicorn $(APPLICATION) --reload
+	docker-compose -f infrastructure/docker/docker-compose.yaml up --build
 
 
 .PHONY: db_upgrade_test
