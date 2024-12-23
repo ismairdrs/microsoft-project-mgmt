@@ -6,6 +6,7 @@ from microsoft.app.exceptions import MicrosoftException
 from microsoft.app.projects.entities import ProjectIn
 from microsoft.app.projects.service import create_project_service
 from microsoft.app.repositories.projects.create_project import Project
+from microsoft.enums import ProjectStatus
 
 
 @pytest.mark.asyncio
@@ -37,7 +38,7 @@ async def test_create_project_success(mock_repo_class):
 
     assert result.name == "Website Development"
     assert result.description == "Develop a responsive website"
-    assert result.status == "OPEN"
+    assert result.status == ProjectStatus.OPEN
     assert str(result.client_id) == "321e6547-e89b-12d3-a456-426614174111"
 
 
