@@ -27,7 +27,7 @@ async def create_client_service(
     except MicrosoftException as e:
         bind_logger.info(f"Ocorreu uma MicrosoftException: {str(e)}")
         raise e
-    except Exception:
+    except Exception as e:
         bind_logger.info(f"Ocorreu uma Exception: {str(e)}")
         raise MicrosoftException(
             type=MicrosoftExceptionType.CREATE_CLIENT_ERROR,
