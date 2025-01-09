@@ -15,7 +15,7 @@ COMMIT_SHA = config("COMMIT_SHA", "")
 DB_USER = config("DB_USER", "postgres")
 DB_PASS = config("DB_PASS", "postgres")
 DB_HOST = config("DB_HOST", "microsoft_db")
-DB_PORT = int(config("DB_PORT", default=5435))
+DB_PORT = config("DB_PORT", default="5435", cast=int)
 DB_NAME = config("DB_NAME", "")
 DB_POOL_SIZE = config(
     "DB_POOL_SIZE", cast=int, default=20
@@ -41,8 +41,6 @@ DB_REUSABLE_POOL = config("DB_REUSABLE_POOL", cast=bool, default=True)
 
 
 def build_database_uri() -> str:
-    print(f'DB_PORT> {DB_PORT}')
-
     return f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 

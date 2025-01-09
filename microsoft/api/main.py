@@ -10,6 +10,7 @@ from microsoft.api.clients.resources import router as clients_router
 from microsoft.api.projects.resources import router as projects_router
 from microsoft.app.exceptions import MicrosoftException
 from microsoft.db.connection import (
+    create_thread_safe_context,
     teardown_thread_safe_context,
 )
 
@@ -24,7 +25,7 @@ from .exception_handlers import (
 def create_application() -> FastAPI:
     application = FastAPI()
 
-    #create_thread_safe_context(is_single_threaded=True)
+    create_thread_safe_context(is_single_threaded=True)
 
     configure_healthcheck(application)
     configure_routes(application)
