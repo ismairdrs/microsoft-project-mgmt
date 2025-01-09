@@ -13,6 +13,11 @@ services:
       - ./volumes/postgresql:/var/lib/postgresql/data
     networks:
       - microsoft
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   microsoft_pgadmin:
     image: dcagatay/pwless-pgadmin4:6.19
