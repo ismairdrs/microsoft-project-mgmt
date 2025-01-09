@@ -15,7 +15,7 @@ COMMIT_SHA = config("COMMIT_SHA", "")
 DB_USER = config("DB_USER", "postgres")
 DB_PASS = config("DB_PASS", "postgres")
 DB_HOST = config("DB_HOST", "microsoft_db")
-DB_PORT = config("DB_PORT", cast=int, default=5435)
+DB_PORT = int(config("DB_PORT", default=5435))
 DB_NAME = config("DB_NAME", "")
 DB_POOL_SIZE = config(
     "DB_POOL_SIZE", cast=int, default=20
