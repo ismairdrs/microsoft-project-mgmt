@@ -25,7 +25,7 @@ from .exception_handlers import (
 def create_application() -> FastAPI:
     application = FastAPI()
 
-    create_thread_safe_context(is_single_threaded=True)
+    #create_thread_safe_context(is_single_threaded=True)
 
     configure_healthcheck(application)
     configure_routes(application)
