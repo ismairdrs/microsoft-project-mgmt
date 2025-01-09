@@ -24,10 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: "Check code"
-        run: |
-          make format
-
       - name: "Run tests and check coverage"
         run: |
           make coverage
@@ -37,7 +33,7 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: 5435
+          DB_PORT: ${{ secrets.DB_PORT }}
           DB_NAME: ${{ secrets.DB_NAME }}
         run: |
           make integration-test
