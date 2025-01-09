@@ -24,10 +24,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: "Check code"
+        run: |
+          make format
+      
       - name: "Run tests and check coverage"
         run: |
           make coverage
-
+      
       - name: "Run integration tests"
         env:
           DB_USER: ${{ secrets.DB_USER }}
