@@ -10,7 +10,6 @@ from microsoft.api.clients.resources import router as clients_router
 from microsoft.api.projects.resources import router as projects_router
 from microsoft.app.exceptions import MicrosoftException
 from microsoft.db.connection import (
-    create_thread_safe_context,
     teardown_thread_safe_context,
 )
 
