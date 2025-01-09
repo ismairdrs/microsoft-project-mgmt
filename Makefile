@@ -78,6 +78,11 @@ unit-test:
 
 .PHONY: integration-test
 integration-test:
+	export DB_USER=postgres
+	export DB_PASS=microsoft_test
+	export DB_HOST=127.0.0.1
+	export DB_PORT=5435
+	export DB_NAME=microsoft_test
 	-	docker container stop microsoft_test_db
 	-	docker container rm microsoft_test_db
 	docker run -d --name microsoft_test_db -e "POSTGRES_DB=microsoft_test" -e "POSTGRES_PASSWORD=microsoft_test" -P -p 127.0.0.1:5435:5432 postgres:14-alpine
