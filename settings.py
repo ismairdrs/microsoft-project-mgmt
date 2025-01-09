@@ -41,8 +41,7 @@ DB_REUSABLE_POOL = config("DB_REUSABLE_POOL", cast=bool, default=True)
 
 
 def build_database_uri() -> str:
-    # As alembic.ini needs separated DB vars, we can't return SQLALCHEMY_DATABASE_URI directly.
-    # genesis/alembic/env.py:28
+    print(f'DB_PORT> {DB_PORT}')
 
     return f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
