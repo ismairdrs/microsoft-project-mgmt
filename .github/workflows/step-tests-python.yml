@@ -28,9 +28,6 @@ jobs:
         run: |
           make format
 
-      - name: "Waiting database"
-        run: sleep 10
-
       - name: "Run tests and check coverage"
         run: |
           make coverage
